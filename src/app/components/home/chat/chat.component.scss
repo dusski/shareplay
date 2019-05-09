@@ -1,0 +1,19 @@
+@import "node_modules/bootstrap/scss/_functions.scss";
+@import "node_modules/bootstrap/scss/_variables.scss";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints.scss";
+
+.chat-wrapper {
+    max-width: none;
+    
+    @include media-breakpoint-up(md) {
+        max-width: 300px;
+    }
+}
+
+.chat-log {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: scroll;
+    padding: 1.5rem;
+}
