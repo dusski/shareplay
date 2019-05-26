@@ -30,4 +30,16 @@ export class ChatService {
     this.socket.emit('new-message', message);
   }
 
+  generateRandomRoomCode(length: number = 6) {
+    let resultString: string = '';
+    const aplhaNumString: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+    for (let i = 0; i < length; i += 1) {
+      const randomCharNumber: number = Math.floor(Math.random() * 62);
+      resultString += aplhaNumString[randomCharNumber];
+    }
+
+    return resultString;
+  }
+
+
 }
