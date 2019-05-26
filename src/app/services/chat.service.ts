@@ -18,7 +18,7 @@ export class ChatService {
   }
 
   getMessages(): Observable<string> {
-    this.socket.on('new-message', (message: string) => {
+    this.socket.on(ChatCode.MESSAGE, (message: string) => {
       console.log(message);
       this.messageSubject.next(message);
     });
@@ -27,7 +27,23 @@ export class ChatService {
   }
 
   sendMessage(message: string) {
-    this.socket.emit('new-message', message);
+    this.socket.emit(ChatCode.MESSAGE, message);
+  }
+
+  joinToRoom(roomCode: string) {
+    if (!roomCode) {
+      return;
+    }
+
+    this.socket.emit(ChatCode.JOIN, roomCode);
+  }
+
+  leaveRoom(roomCode: string) {
+    if (!roomCode) {
+      return;
+    }
+
+    this.socket.emit(ChatCode.LEAVE, roomCode);
   }
 
   generateRandomRoomCode(length: number = 6) {
@@ -41,5 +57,10 @@ export class ChatService {
     return resultString;
   }
 
+}
 
+export enum ChatCode {
+  MESSAGE = 'new-message',
+  JOIN = 'join-room',
+  LEAVE = 'leave-room'
 }
