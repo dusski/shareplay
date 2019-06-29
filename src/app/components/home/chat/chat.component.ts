@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   host: {
-    class: "chat-wrapper d-flex"
+    class: "chat-wrapper d-flex flex-grow-1"
   }
 })
 export class ChatComponent implements OnInit {

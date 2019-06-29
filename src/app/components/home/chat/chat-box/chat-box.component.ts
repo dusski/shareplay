@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'shp-chat-box',
@@ -10,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatBoxComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _chatService: ChatService
+  ) { }
 
   ngOnInit() {
+  }
+
+  sendMessage(chatbox: HTMLInputElement) {
+    let { value: message } = chatbox;
+
+    if (!message) {
+      return;
+    }
+
+    this._chatService.sendMessage(message);
+    chatbox.value = '';
   }
 
 }
