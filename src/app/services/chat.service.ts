@@ -9,52 +9,58 @@ import { map } from 'rxjs/operators';
 })
 export class ChatService {
 
-  private socket: SocketIOClient.Socket;
-
-  private messageSubject: Subject<string> = new Subject<string>();
+  private _roomCode: string;
+  private socket: SocketIOClient.Socket
+  private messageSubject: Subject<string> = new Subject<string>()
 
   constructor() {
-    this.socket = io(environment.serverUrl);
+    if (!environment.serverUrl) {
+      return
+    }
+
+    this.socket = io(environment.serverUrl)
+
+    this.socket.on(ChatCode.MESSAGE, (message: string) => {
+      console.log(message)
+      this.messageSubject.next(message)
+    })
   }
 
-  getMessages(): Observable<string> {
-    this.socket.on(ChatCode.MESSAGE, (message: string) => {
-      console.log(message);
-      this.messageSubject.next(message);
-    });
-
-    return this.messageSubject.asObservable();
+  onNewMessage(): Observable<string> {
+    return this.messageSubject.asObservable()
   }
 
   sendMessage(message: string) {
-    this.socket.emit(ChatCode.MESSAGE, message);
+    this.socket.emit(ChatCode.MESSAGE, message, this._roomCode)
   }
 
-  joinToRoom(roomCode: string) {
+  joinRoom(roomCode: string) {
     if (!roomCode) {
-      return;
+      return
     }
 
-    this.socket.emit(ChatCode.JOIN, roomCode);
+    this._roomCode = roomCode;
+
+    this.socket.emit(ChatCode.JOIN, roomCode)
   }
 
   leaveRoom(roomCode: string) {
     if (!roomCode) {
-      return;
+      return
     }
 
-    this.socket.emit(ChatCode.LEAVE, roomCode);
+    this.socket.emit(ChatCode.LEAVE, roomCode)
   }
 
   generateRandomRoomCode(length: number = 6) {
-    let resultString: string = '';
-    const aplhaNumString: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+    let resultString: string = ''
+    const aplhaNumString: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
     for (let i = 0; i < length; i += 1) {
-      const randomCharNumber: number = Math.floor(Math.random() * 62);
-      resultString += aplhaNumString[randomCharNumber];
+      const randomCharNumber: number = Math.floor(Math.random() * 62)
+      resultString += aplhaNumString[randomCharNumber]
     }
 
-    return resultString;
+    return resultString
   }
 
 }
