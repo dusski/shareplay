@@ -1,7 +1,7 @@
 <div class="input-group">
-  <input type="text" class="form-control" aria-describedby="basic-addon2" name="chatbox" id="chatbox" #chatbox
-    (keydown.enter)="sendMessage(chatbox)">
+  <input type="text" class="form-control" aria-describedby="basic-addon2" name="chatbox" id="chatbox" [(ngModel)]="message"
+    (keydown.enter)="sendMessage()">
   <div class="input-group-append">
-    <button class="btn btn-outline-primary" type="button">Send</button>
+    <button class="btn btn-outline-primary" type="button" (click)="sendMessage()">Send</button>
   </div>
 </div>
