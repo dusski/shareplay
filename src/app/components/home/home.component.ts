@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
 
         this._roomCode = code
-        this._chatService.joinToRoom(code)
+        this._chatService.joinRoom(code)
 
         // this.chatService
         //   .getMessages()
