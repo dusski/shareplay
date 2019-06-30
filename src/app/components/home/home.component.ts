@@ -42,12 +42,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this._roomCode = code
         this._chatService.joinRoom(code)
 
-        // this.chatService
-        //   .getMessages()
-        //   .subscribe((message: string) => {
-        //     this.messages = [...this.messages, message];
-        //   });
-
       }
     )
   }
