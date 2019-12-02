@@ -1,25 +1,26 @@
-const express = require('express');
-const app = express();
+import e, { Express } from 'express';
+import { Server } from 'http';
+import SocketIO from 'socket.io';
 
-const http = require('http');
-const server = http.Server(app);
+const app: Express = e();
 
-const socketIO = require('socket.io');
-const io = socketIO(server);
+const server: Server = new Server(app); 
 
-const port = process.env.PORT || 3000;
+const io: SocketIO.Server = SocketIO(server);
 
-const rooms = {};
+const port: number = (process.env.PORT && parseInt(process.env.PORT)) || 3000;
 
-io.on('connection', (socket) => {
+const rooms: { [roomCode: string]: number } = {};
+
+io.on('connection', (socket: SocketIO.Socket) => {
     console.log('user connected');
 
-    socket.on('new-message', (message) => {
+    socket.on('new-message', (message: string) => {
         console.log(message);
         io.emit('new-message', message);
     });
 
-    socket.on('join-room', (roomCode) => {
+    socket.on('join-room', (roomCode: string) => {
         console.log('user with roomCode [' + roomCode + '] connected');
 
         if (!rooms[roomCode]) {
@@ -33,13 +34,13 @@ io.on('connection', (socket) => {
         socket.join(roomCode);
     });
 
-    socket.on('leave-room', (roomCode) => {
+    socket.on('leave-room', (roomCode: string) => {
         console.log('user with roomCode [' + roomCode + '] left');
 
         if (rooms[roomCode] > 1) {
             rooms[roomCode] -= 1;
         } else if (rooms[roomCode] <= 0) {
-            delete rooms[roomcode];
+            delete rooms[roomCode];
         }
 
         console.log(rooms);
