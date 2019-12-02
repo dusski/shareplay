@@ -1,0 +1,12 @@
+**Shareplay - Feature set**
+
+1. Baloncici za dopisivanje kao messendzer ili instagram []
+2. Da svaki korisnik ima svoje ima []
+3. Da svaki korisnik ima svoju sliku []
+4. Da korisnik moze da pusti video za sve []
+5. Da korisnik moze da posalje video drugima []
+6. Da korisnik moze da posalje video odredjenoj osobi []
+8. Da korisnik moze da sacuva odredjeni video []
+9. Da korisnik koji je postavio video moze da ga zakljuca []
+10. Da korisnik moze da iskljuci zvucna obavestenja za poruke []
+10. Da video plejer moze da se povecava i smanjuje po volji []
