@@ -9,16 +9,16 @@
             "request": "launch",
             "name": "Launch Chrome",
             "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}/client"
         },
         {
             "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}\\client\\src\\app\\app-routing.module.ts",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
-        }
+            "request": "attach",
+            "name": "Node: Nodemon",
+            "processId": "${command:PickProcess}",
+            "sourceMaps": true,
+            "restart": true,
+            "protocol": "inspector"
+          }
     ]
 }
