@@ -1,11 +1,13 @@
 {
-  "name": "server",
+  "name": "shareplay-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --config nodemon.json --inspect ./index.ts"
+    "build": "tsc",
+    "start-js": "npm run build && nodemon .\\dist\\index.js",
+    "start-debug": "nodemon --config nodemon.json --inspect ./index.ts"
   },
   "keywords": [],
   "author": "",
