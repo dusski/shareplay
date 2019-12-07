@@ -2,10 +2,10 @@
   "name": "shareplay",
   "version": "1.0.0",
   "description": "",
-  "main": "",
+  "main": "server\\dist\\index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-server":"cd .\\server\\ && npm i && npm run start-js"
+    "start":"npm i && npm start-js"
   },
   "repository": {
     "type": "git",
